@@ -6,6 +6,14 @@ import requests
 # Parse env vars
 newrelicAccountId = str(os.getenv("NEWRELIC_ACCOUNT_ID"))
 newrelicLicenseKey = str(os.getenv("NEWRELIC_LICENSE_KEY"))
+githubActor = str(os.getenv("GITHUB_ACTOR"))
+githubJobId = str(os.getenv("GITHUB_JOB"))
+githubRepository = str(os.getenv("GITHUB_REPOSITORY"))
+githubRunId = str(os.getenv("GITHUB_RUN_ID"))
+githubRunAttempt = str(os.getenv("GITHUB_RUN_ATTEMPT"))
+githubRunnerName = str(os.getenv("RUNNER_NAME"))
+githubRunnerOs = str(os.getenv("RUNNER_OS"))
+
 # customEventName = str(os.getenv("CUSTOM_EVENT_NAME"))
 customEventName = "MyTestEvent"
 
@@ -24,6 +32,13 @@ startTime = endTime - timedelta(minutes=1)
 # Prepare custom event
 data = [{
     "eventType": customEventName,
+    "githubActor": githubActor,
+    "githubJobId": githubJobId,
+    "githubRepository": githubRepository,
+    "githubRunId": githubRunId,
+    "githubRunAttempt": githubRunAttempt,
+    "githubRunnerName": githubRunnerName,
+    "githubRunnerOs": githubRunnerOs,
     "startTimestamp": startTime.timestamp(),
     "endTimestamp": endTime.timestamp(),
     "duration": endTime.timestamp() - startTime.timestamp(),

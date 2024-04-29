@@ -23,21 +23,25 @@ jobs:
     steps:
       # Checkout the repository to the GitHub Actions runner
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v3
 
       # Set up Python
       - name: Set up Python
+        id: setup_python
         uses: actions/setup-python@v4
         with:
           python-version: "3.11"
 
       # Install dependencies
       - name: Install dependencies
+        id: install_dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r ./app/requirements.txt
 
-      # Run account crawler
-      - name: Run account crawler
+      # Track deployment
+      - name: Track deployment
+        id: track_deployment
         run: |
           python ./app//track_deployment.py
