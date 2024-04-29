@@ -14,6 +14,7 @@ githubRunAttempt = str(os.getenv("GITHUB_RUN_ATTEMPT"))
 githubRunnerName = str(os.getenv("RUNNER_NAME"))
 githubRunnerOs = str(os.getenv("RUNNER_OS"))
 
+startTimestamp = int(os.getenv("START_TIMESTAMP"))
 # customEventName = str(os.getenv("CUSTOM_EVENT_NAME"))
 customEventName = "MyTestEvent"
 
@@ -26,8 +27,7 @@ headers = {
     "Api-Key": newrelicLicenseKey,
 }
 
-endTime = datetime.now()
-startTime = endTime - timedelta(minutes=1)
+endTimestamp = datetime.now().timestamp()
 
 # Prepare custom event
 data = [{
@@ -39,9 +39,9 @@ data = [{
     "githubRunAttempt": githubRunAttempt,
     "githubRunnerName": githubRunnerName,
     "githubRunnerOs": githubRunnerOs,
-    "startTimestamp": startTime.timestamp(),
-    "endTimestamp": endTime.timestamp(),
-    "duration": endTime.timestamp() - startTime.timestamp(),
+    "startTimestamp": startTimestamp,
+    "endTimestamp": endTimestamp,
+    "duration": endTimestamp - startTimestamp,
 }]
 
 # Make POST request to create custom event
