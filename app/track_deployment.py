@@ -10,8 +10,7 @@ newrelicLicenseKey = str(os.getenv("NEWRELIC_LICENSE_KEY"))
 customEventName = "MyTestEvent"
 
 # Decide the New Relic events endpoint
-newrelicEventsEndpoint = f"https://insights-collector.eu01.nr-data.net/v1/accounts/${
-    newrelicAccountId}/events" if newrelicLicenseKey[:2] == "eu" else f"https://insights-collector.nr-data.net/v1/accounts/${newrelicAccountId}/events"
+newrelicEventsEndpoint = f"https://insights-collector.eu01.nr-data.net/v1/accounts/${newrelicAccountId}/events" if newrelicLicenseKey[:2] == "eu" else f"https://insights-collector.nr-data.net/v1/accounts/${newrelicAccountId}/events"
 
 # Prepare request headers
 headers = {
