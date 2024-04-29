@@ -1,0 +1,43 @@
+name: "Terraform Core"
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: "Test"
+    runs-on: ubuntu-latest
+
+    env:
+      NEWRELIC_ACCOUNT_ID: ${{ secrets.NEWRELIC_ACCOUNT_ID }}
+      NEWRELIC_LICENSE_KEY: ${{ secrets.NEWRELIC_LICENSE_KEY }}
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      # Checkout the repository to the GitHub Actions runner
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      # Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # Run account crawler
+      - name: Run account crawler
+        run: |
+          python ./track_deployment.py
