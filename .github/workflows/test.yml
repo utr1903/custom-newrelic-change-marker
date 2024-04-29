@@ -1,4 +1,4 @@
-name: "Terraform Core"
+name: "Track Deployment Performance"
 
 on:
   workflow_dispatch:
